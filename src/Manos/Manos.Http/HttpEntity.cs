@@ -115,6 +115,10 @@ namespace Manos.Http {
 			set;
 		}
 
+		public bool StreamBody {
+			get;
+			set;
+		}
 		
 		public Encoding ContentEncoding {
 			get { return Headers.ContentEncoding; }

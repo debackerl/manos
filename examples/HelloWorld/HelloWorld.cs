@@ -108,6 +108,24 @@ namespace HelloWorld {
 				r.Execute ();
 			});
 
+			Get ("/couch", ctx => {
+
+				var r = new HttpRequest ("http://localhost:5984/snippets/roxy");
+
+				r.Connected += (response) => {
+					response.BodyData += (data, offset, length) => {
+						ctx.Response.Write (data, offset, length);
+					};
+
+					response.Completed += delegate {
+						ctx.Response.End ();
+					};
+
+					response.Read ();
+				};
+				r.Execute ();
+			});
+
 			int count = 0;
 			Get ("/request_loop", ctx => {
 
